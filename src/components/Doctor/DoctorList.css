@@ -1,0 +1,69 @@
+/* DoctorList.css */
+.doctor-list {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .doctor-list h2 {
+    color: #34495e;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .doctor-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .doctor-list ul li {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .doctor-list ul li:last-child {
+    margin-bottom: 0;
+  }
+  
+  .doctor-list ul li:hover {
+    background-color: #ecf0f1;
+    cursor: pointer;
+  }
+  
+  .doctor-list ul li .doctor-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .doctor-list ul li .doctor-info span {
+    color: #7f8c8d;
+    font-size: 14px;
+  }
+  
+  .doctor-list ul li .doctor-name {
+    font-weight: bold;
+    color: #2d3e50;
+  }
+  
+  .doctor-list ul li .doctor-specialty {
+    color: #f39c12;
+    font-weight: bold;
+  }
+  
+  .doctor-list ul li .doctor-contact {
+    font-weight: bold;
+    color: #1abc9c;
+  }
+  

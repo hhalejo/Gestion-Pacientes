@@ -1,0 +1,39 @@
+/* Estilos para el encabezado */
+/* Estilos para el encabezado */
+.header {
+  background-color: #34495e;  /* Fondo oscuro para el encabezado */
+  color: white;               /* Texto blanco */
+  padding: 20px 40px;         /* Espaciado interno (padding) */
+  text-align: center;         /* Centra el texto */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Sombra sutil debajo del encabezado */
+  font-size: 24px;            /* Tamaño de fuente más grande */
+  font-weight: bold;          /* Negrita para mayor énfasis */
+  position: fixed;            /* Fija el encabezado en la parte superior */
+  top: 0;                     /* Coloca el encabezado en la parte superior de la página */
+  left: 250px;                /* Asegura que el encabezado empiece después del sidebar (ajusta según el ancho del sidebar) */
+  width: calc(100% - 250px);  /* Hace que el encabezado ocupe el 100% del ancho menos el ancho del sidebar */
+  z-index: 1000;              /* Asegura que esté por encima de otros elementos */
+}
+
+/* Estilo para el contenido de la página */
+body {
+  padding-top: 80px;  /* Ajusta este valor según la altura de tu encabezado */
+  margin-left: 250px; /* Deja espacio para el sidebar */
+}
+.header h1 {
+  margin: 0;                  /* Elimina los márgenes predeterminados */
+}
+
+.header a {
+  color: #ecf0f1;             /* Enlaces en color gris claro */
+  text-decoration: none;      /* Sin subrayado */
+}
+
+.header a:hover {
+  color: #1abc9c;             /* Color al pasar el mouse sobre los enlaces */
+}
+
+/* Asegura que el body respete el espacio para el encabezado */
+body {
+  padding-top: 100px;  /* Ajusta este valor según la altura de tu encabezado */
+}
