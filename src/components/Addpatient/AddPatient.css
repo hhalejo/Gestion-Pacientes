@@ -1,0 +1,75 @@
+/* Contenedor principal del formulario */
+.add-patient-container {
+    width: 100%;
+    max-width: 900px; /* Aumentamos el ancho máximo del formulario */
+    margin: 0 auto;
+    margin-left: 140px;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  
+  .add-patient-container:hover {
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+    transform: scale(1.02); /* Le da un pequeño efecto de agrandamiento */
+  }
+  
+  /* Título */
+  .add-patient-container h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #4a90e2;
+    transition: color 0.3s ease;
+  }
+  
+  .add-patient-container:hover h2 {
+    color: #357ab7; /* Cambia el color del título al pasar el ratón */
+  }
+  
+  /* Estilo de los inputs */
+  .add-patient-container input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 1.2rem;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #d0d4d8;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+  
+  /* Efecto en los inputs cuando están enfocados */
+  .add-patient-container input:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
+    outline: none;
+  }
+  
+  /* Estilo de los botones */
+  .add-patient-container button {
+    background-color: #4a90e2;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 1rem;
+  }
+  
+  /* Efecto hover en el botón */
+  .add-patient-container button:hover {
+    background-color: #357ab7;
+    transform: translateY(-3px); /* Efecto de elevación */
+  }
+  
+  /* Efecto cuando el botón es presionado */
+  .add-patient-container button:active {
+    transform: translateY(1px); /* Rebote al presionar el botón */
+  }
+  

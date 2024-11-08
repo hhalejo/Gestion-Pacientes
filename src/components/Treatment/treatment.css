@@ -1,52 +1,79 @@
-/* TreatmentList.css */
+/* Contenedor general de tratamientos */
+.treatment-details {
+  margin-top: 40px;
+  padding: 1rem;
+  background-color: #f9fafc;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.treatment-details h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Estilo del botón de "Mostrar Tratamientos" */
+.treatment-details button {
+  display: block;
+  margin: 10 auto 20px;
+  background-color: #4a90e2;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.treatment-details button:hover {
+  background-color: #3b78c3;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo de la lista de tratamientos */
 .treatment-list {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-  }
-  
-  .treatment-list h2 {
-    color: #34495e;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .treatment-list ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .treatment-list ul li {
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 16px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .treatment-list ul li:last-child {
-    margin-bottom: 0;
-  }
-  
-  .treatment-list ul li:hover {
-    background-color: #ecf0f1;
-    cursor: pointer;
-  }
-  
-  .treatment-list ul li .treatment-name {
-    font-weight: bold;
-    color: #2d3e50;
-  }
-  
-  .treatment-list ul li .treatment-patient {
-    color: #7f8c8d;
-  }
-  
+  list-style-type: none;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+/* Estilo para cada tratamiento */
+.treatment-card {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  top:40px;
+}
+
+.treatment-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para los detalles del tratamiento */
+.treatment-card strong {
+  color: #4a90e2;
+  font-size: 1rem;
+}
+
+.treatment-card p {
+  color: #555;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Estilo de costo y fecha para destacarlos */
+.treatment-card .highlight {
+  font-weight: bold;
+  color: #333;
+}

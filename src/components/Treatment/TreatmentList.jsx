@@ -1,13 +1,12 @@
-// Treatments.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './treatment.css'
 
 const Treatments = ({ patientId }) => {
   const [treatments, setTreatments] = useState([]);
 
-  // Este efecto se ejecuta cuando cambia el patientId
   useEffect(() => {
-    setTreatments([]); // Limpiar tratamientos cuando cambia el paciente
+    setTreatments([]); 
   }, [patientId]);
 
   const fetchTreatments = () => {
@@ -29,21 +28,21 @@ const Treatments = ({ patientId }) => {
       <button onClick={fetchTreatments}>Mostrar Tratamientos</button>
       
       {treatments.length > 0 && (
-        <div>
+        <div className='CardTratment'>
           <h3>Tratamientos del Paciente</h3>
           <ul>
             {treatments.map((treatment) => (
               <li key={treatment.ID_Tratamiento}>
-                <strong>Tratamiento:</strong> {treatment.Nombre_Tratamiento} <br />
-                <strong>Medico:</strong> {treatment.ID_Medico} <br />
-                <strong>Descripción:</strong> {treatment.Descripcion} <br />
-                <strong>Fecha Inicio:</strong> {treatment.Fecha_Inicio} <br />
-                <strong>Fecha Fin:</strong> {treatment.Fecha_Fin} <br />
-                <strong>Frecuencia:</strong> {treatment.Frecuencia} <br />
-                <strong>Duración de la Sesión:</strong> {treatment.Duracion_Sesion} <br />
-                <strong>Costo:</strong> ${treatment.Costo} <br />
-                <strong>Notas:</strong> {treatment.Notas} <br />
-                <strong>Estado:</strong> {treatment.Estado} <br />
+                <div className="treatment-field"><strong>Tratamiento:</strong> {treatment.Nombre_Tratamiento}</div>
+                <div className="treatment-field"><strong>Médico:</strong> {treatment.ID_Medico}</div>
+                <div className="treatment-field"><strong>Descripción:</strong> {treatment.Descripcion}</div>
+                <div className="treatment-field"><strong>Fecha Inicio:</strong> {treatment.Fecha_Inicio}</div>
+                <div className="treatment-field"><strong>Fecha Fin:</strong> {treatment.Fecha_Fin}</div>
+                <div className="treatment-field"><strong>Frecuencia:</strong> {treatment.Frecuencia}</div>
+                <div className="treatment-field"><strong>Duración de la Sesión:</strong> {treatment.Duracion_Sesion}</div>
+                <div className="treatment-field"><strong>Costo:</strong> ${treatment.Costo}</div>
+                <div className="treatment-field"><strong>Notas:</strong> {treatment.Notas}</div>
+                <div className="treatment-field"><strong>Estado:</strong> {treatment.Estado}</div>
               </li>
             ))}
           </ul>

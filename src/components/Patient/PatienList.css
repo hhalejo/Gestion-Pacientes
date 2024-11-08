@@ -2,17 +2,19 @@
 .patient-list-container {
   display: flex;
   flex-direction: row;
-  gap: 2rem;
+  gap: 3rem;
   padding: 2rem;
   font-family: 'Arial', sans-serif;
   background-color: #f3f5f9;
   border-radius: 12px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
   width: 150%;
   margin: auto;
-  opacity: 0; /* Comienza invisible */
-  transform: translateY(-50px); /* Comienza desplazado hacia arriba */
-  animation: slideIn 0.6s ease forwards; /* Animación al cargar */
+  margin-left: 200px;
+  opacity: 0; 
+  transform: translateY(-90px); 
+  animation: slideIn 0.6s ease forwards; 
 }
 
 /* Animación para mover el contenedor al centro */
@@ -27,9 +29,13 @@
   }
 }
 
+.etiqueta{
+  margin-top: 10px;
+}
+
 /* Estilo de la lista de pacientes */
 .patient-list {
-  width: 110%;
+  width: 100%;
   background-color: #ffffff;
   padding: 1.5rem;
   border-radius: 12px;
@@ -49,11 +55,13 @@
   background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative; /* Asegura que el botón quede en una posición fija dentro del contenedor */
   transition: opacity 0.3s ease, transform 0.3s ease;
   opacity: 1;
   transform: translateY(0);
 }
 
+/* Clase para ocultar los detalles */
 .patient-details.hidden {
   opacity: 0;
   transform: translateY(20px);
@@ -90,7 +98,6 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
-  
 }
 
 .patient-item:hover {
@@ -161,4 +168,42 @@ button:focus {
 .large-input::placeholder {
   color: #bbb;
   font-style: italic;
+}
+
+/* Contenedor para los botones dentro de los detalles */
+.buttons-container {
+  display: flex;
+  justify-content: space-between; /* Espacio entre los botones */
+  align-items: center; /* Centra los botones verticalmente */
+  gap: 10px; /* Agrega espacio entre los botones */
+}
+
+/* Opcional: Puedes ajustar el tamaño de los botones */
+.buttons-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+/* Estilos del botón "Editar Paciente" */
+.edit-btn {
+  position: absolute; /* Mantiene el botón fijo dentro de los detalles del paciente */
+  top: 35px; 
+  right: 35px;
+  padding: 7px 10px;
+  font-size: 12px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos del componente TreatmentList */
+.TreatmentList {
+  margin-top: 30px;
+  /* Ajustes si es necesario */
 }

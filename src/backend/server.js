@@ -78,10 +78,11 @@ app.get('/medicos', (req, res) => {
 
 // Ruta para agregar pacientes
 app.post('/Pacientes', (req, res) => {
-  const { Nombre, Edad, Direccion, Telefono } = req.body;
+  const { ID_Paciente, Nombre, Edad, Genero, Direccion, Numero_Contacto, Antecedentes_Medicos, Telefono } = req.body;
 
-  const query = 'INSERT INTO pacientes (nombre, edad, direccion, telefono) VALUES (?, ?, ?, ?)';
-  db.query(query, [Nombre, Edad, Direccion, Telefono], (err, results) => { // Cambio a db.query
+  const query = 'INSERT INTO pacientes (id_paciente, nombre, edad, genero, direccion, telefono, numero_contacto, antecedentes_medicos) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+  
+  db.query(query, [ID_Paciente, Nombre, Edad, Genero, Direccion, Telefono, Numero_Contacto, Antecedentes_Medicos], (err, results) => {
     if (err) {
       console.error('Error al agregar paciente:', err);
       return res.status(500).json({ message: 'Error al agregar paciente', error: err });
