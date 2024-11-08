@@ -106,6 +106,25 @@ app.post('/citas', (req, res) => {
 
 
 
+app.get('/tratamientos/:patientId', (req, res) => {
+  const patientId = req.params.patientId;
+  
+  // Consulta para obtener tratamientos
+  const query = 'SELECT * FROM Tratamientos WHERE ID_Paciente = ?';
+  db.query(query, [patientId], (err, results) => {
+    if (err) {
+      console.error('Error al obtener tratamientos:', err);
+      res.status(500).json({ error: 'Error en el servidor' });
+    } else {
+      // Asegúrate de asignar el resultado a la variable `tratamientos`
+      const tratamientos = results;
+      res.json(tratamientos); // envía tratamientos como respuesta
+    }
+  });
+});
+
+
+
 
 // Iniciar servidor
 app.listen(port, () => {

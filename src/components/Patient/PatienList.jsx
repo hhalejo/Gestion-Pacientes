@@ -1,17 +1,19 @@
+// PatientList.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './PatienList.css';
+import Treatments from '../Treatment/TreatmentList'; // Importa el componente Treatments
 
 const PatientList = () => {
   const [patients, setPatients] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedPatient, setSelectedPatient] = useState(null); // Paciente seleccionado para mostrar detalles
-  const [isEditing, setIsEditing] = useState(false); // Estado para controlar si se está editando
+  const [selectedPatient, setSelectedPatient] = useState(null); 
+  const [isEditing, setIsEditing] = useState(false);
+  const [updatedPatient, setUpdatedPatient] = useState({});
 
   useEffect(() => {
     axios.get('http://localhost:5000/pacientes')
       .then((response) => {
-        console.log("Datos obtenidos:", response.data);
         setPatients(response.data);
       })
       .catch((error) => {
@@ -20,60 +22,39 @@ const PatientList = () => {
   }, []);
 
   const handlePatientClick = (patient) => {
-    console.log("Paciente seleccionado:", patient); // Verificar que contiene ID_Paciente
     setSelectedPatient(patient);
-    setIsEditing(false); // Resetear la edición cuando se selecciona un nuevo paciente
+    setIsEditing(false);
+    setUpdatedPatient(patient); // Rellenar el formulario de edición con los datos actuales
   };
-
-  // Filtra los pacientes según el término de búsqueda
-  const filteredPatients = patients.filter(patient =>
-    patient.Nombre && patient.Nombre.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
   const handleEditClick = () => {
-    setIsEditing(true); // Activar el modo de edición
+    setIsEditing(true); // Cambiar a modo de edición
   };
 
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setSelectedPatient({
-      ...selectedPatient,
+    setUpdatedPatient(prevState => ({
+      ...prevState,
       [name]: value,
-    });
+    }));
   };
-
-
 
   const handleSaveClick = () => {
-    if (!selectedPatient || !selectedPatient.ID_Paciente) {
-      console.error("ID del paciente no encontrado o es indefinido");
-      return;
-    }
-  
-    const patientId = selectedPatient.ID_Paciente;
-  
-    // Actualizamos todos los datos relevantes
-    const updatedData = {
-      Nombre: selectedPatient.Nombre,
-      Edad: selectedPatient.Edad,
-      Direccion: selectedPatient.Direccion, 
-      Telefono: selectedPatient.Telefono,   
-      Antecedentes_Medicos: selectedPatient.Antecedentes_Medicos,  
-    };
-  
-    // Realizar el PUT
-    axios.put(`http://localhost:5000/Pacientes/${patientId}`, updatedData)
+    axios.put(`http://localhost:5000/pacientes/${selectedPatient.ID_Paciente}`, updatedPatient)
       .then(response => {
-        console.log('Paciente actualizado:', response.data);
+        setSelectedPatient(updatedPatient); // Actualizar los datos del paciente
+        setIsEditing(false);
         alert('Paciente actualizado correctamente');
-        // Si es necesario, actualiza la lista de pacientes para reflejar los cambios
-        // Puedes hacer un nuevo GET o actualizar el estado local (setPatients)
       })
       .catch(error => {
         console.error('Error al actualizar paciente:', error);
-        alert('Error al actualizar paciente: ' + error.message);
+        alert('Error al actualizar paciente');
       });
   };
+
+  const filteredPatients = patients.filter(patient =>
+    patient.Nombre && patient.Nombre.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="patient-list-container">
@@ -91,14 +72,12 @@ const PatientList = () => {
           {filteredPatients.length > 0 ? (
             filteredPatients.map((patient, index) => (
               <li
-              key={patient.ID_Paciente || index}
-
+                key={patient.ID_Paciente || index}
                 className="patient-item"
                 onClick={() => handlePatientClick(patient)}
               >
                 <div>
                   <strong>{patient.Nombre || "Nombre no disponible"}</strong>
-                  
                 </div>
               </li>
             ))
@@ -108,29 +87,9 @@ const PatientList = () => {
         </ul>
       </div>
 
-      {/* Contenedor de detalles del paciente */}
       {selectedPatient && (
         <div className="patient-details">
           <h2>Detalles del Paciente</h2>
-
-          {/* Mostrar datos en modo de solo lectura o editable */}
-
-          <div>
-            <strong>ID:</strong>
-            {isEditing ? (
-              <input
-                type="text"
-                name="ID_Paciente"
-                value={selectedPatient.ID_Paciente || ''}
-                onChange={handleChange}
-              />
-            ) : (
-              <p>{selectedPatient.ID_Paciente}</p>
-            )}
-          </div>
-
-
-
 
           <div>
             <strong>Nombre:</strong>
@@ -138,8 +97,8 @@ const PatientList = () => {
               <input
                 type="text"
                 name="Nombre"
-                value={selectedPatient.Nombre || ''}
-                onChange={handleChange}
+                value={updatedPatient.Nombre || ''}
+                onChange={handleInputChange}
               />
             ) : (
               <p>{selectedPatient.Nombre}</p>
@@ -152,8 +111,8 @@ const PatientList = () => {
               <input
                 type="number"
                 name="Edad"
-                value={selectedPatient.Edad || ''}
-                onChange={handleChange}
+                value={updatedPatient.Edad || ''}
+                onChange={handleInputChange}
               />
             ) : (
               <p>{selectedPatient.Edad} años</p>
@@ -166,8 +125,8 @@ const PatientList = () => {
               <input
                 type="text"
                 name="Direccion"
-                value={selectedPatient.Direccion || ''}
-                onChange={handleChange}
+                value={updatedPatient.Direccion || ''}
+                onChange={handleInputChange}
               />
             ) : (
               <p>{selectedPatient.Direccion}</p>
@@ -180,20 +139,11 @@ const PatientList = () => {
               <input
                 type="text"
                 name="Telefono"
-                value={selectedPatient.Telefono || ''}
-                onChange={handleChange}
+                value={updatedPatient.Telefono || ''}
+                onChange={handleInputChange}
               />
             ) : (
-              <p>{selectedPatient.telefono}</p>
-            )}
-          </div>
-
-          {/* Mostrar el botón de editar o guardar */}
-          <div>
-            {!isEditing ? (
-              <button onClick={handleEditClick}>Editar</button>
-            ) : (
-              <button onClick={handleSaveClick}>Guardar cambios</button>
+              <p>{selectedPatient.Telefono}</p>
             )}
           </div>
 
@@ -202,22 +152,32 @@ const PatientList = () => {
             {isEditing ? (
               <textarea
                 name="Antecedentes_Medicos"
-                value={selectedPatient.Antecedentes_Medicos || ''}
-                onChange={handleChange}
+                value={updatedPatient.Antecedentes_Medicos || ''}
+                onChange={handleInputChange}
                 rows={6}
                 className="large-input"
               />
             ) : (
               <textarea
-              
                 value={selectedPatient.Antecedentes_Medicos || ''}
                 readOnly
                 rows={6}
-                
                 className="large-input"
               />
             )}
           </div>
+
+          {/* Botón de editar o guardar */}
+          <div>
+            {isEditing ? (
+              <button onClick={handleSaveClick}>Guardar cambios</button>
+            ) : (
+              <button onClick={handleEditClick}>Editar paciente</button>
+            )}
+          </div>
+
+          {/* Usar el componente Treatments y pasar el ID del paciente */}
+          <Treatments patientId={selectedPatient.ID_Paciente} />
         </div>
       )}
     </div>
