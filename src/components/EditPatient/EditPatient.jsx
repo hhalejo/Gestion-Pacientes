@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './EditPatient.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EditPatient = ({ patient, onSave, onCancel }) => {
   const [updatedPatient, setUpdatedPatient] = useState({ ...patient });
@@ -17,12 +19,26 @@ const EditPatient = ({ patient, onSave, onCancel }) => {
   const handleSaveClick = () => {
     axios.put(`http://localhost:5000/pacientes/${patient.ID_Paciente}`, updatedPatient)
       .then(response => {
-        onSave(updatedPatient);
-        alert('Paciente actualizado correctamente');
+        toast.success('Paciente actualizado correctamente', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+
       })
       .catch(error => {
         console.error('Error al actualizar paciente:', error);
-        alert('Error al actualizar paciente');
+        toast.error('Error al actualizar paciente', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
       });
   };
 
@@ -88,8 +104,11 @@ const EditPatient = ({ patient, onSave, onCancel }) => {
         <div className="form-actions">
           <button type="button" onClick={handleSaveClick} className="save-btn">Guardar cambios</button>
           <button type="button" onClick={onCancel} className="cancel-btn">Cancelar</button>
-        </div>
+        </div>  
       </form>
+
+      
+      <ToastContainer />
     </div>
   );
 };

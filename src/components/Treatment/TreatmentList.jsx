@@ -12,7 +12,7 @@ const Treatments = ({ patientId }) => {
   const fetchTreatments = () => {
     if (!patientId) return;
 
-    axios.get(`http://localhost:5000/tratamientos/${patientId}`)
+    axios.get(`http://localhost:5000/registro_tratamientos/${patientId}`)
       .then(response => {
         console.log("Tratamientos obtenidos:", response.data);
         setTreatments(response.data);

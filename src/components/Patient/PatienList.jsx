@@ -56,7 +56,6 @@ const PatientList = () => {
               >
                 <div>
                   <strong>{patient.Nombre || "Nombre no disponible"}</strong>
-                  <p>{`ID: ${patient.ID_Paciente || "ID no disponible"}`}</p> 
                 </div>
               </li>
             ))

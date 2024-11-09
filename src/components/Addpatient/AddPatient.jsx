@@ -20,7 +20,7 @@ const AddPatient = () => {
     const { name, value } = e.target;
     setPatient((prev) => ({
       ...prev,
-      [name]: value
+      [name]: valuea
     }));
   };
 
@@ -126,7 +126,6 @@ const AddPatient = () => {
         
         <button type="submit">Agregar Paciente</button>
       </form>
-
       {/* Contenedor para las notificaciones */}
       <ToastContainer />
     </div>

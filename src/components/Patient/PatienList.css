@@ -201,9 +201,3 @@ button:focus {
 .edit-btn:hover {
   background-color: #0056b3;
 }
-
-/* Estilos del componente TreatmentList */
-.TreatmentList {
-  margin-top: 30px;
-  /* Ajustes si es necesario */
-}

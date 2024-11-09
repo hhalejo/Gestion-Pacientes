@@ -107,11 +107,11 @@ app.post('/citas', (req, res) => {
 
 
 
-app.get('/tratamientos/:patientId', (req, res) => {
+app.get('/registro_tratamientos/:patientId', (req, res) => {
   const patientId = req.params.patientId;
   
   // Consulta para obtener tratamientos
-  const query = 'SELECT * FROM Tratamientos WHERE ID_Paciente = ?';
+  const query = 'SELECT * FROM Registro_Tratamientos WHERE ID_Paciente = ?';
   db.query(query, [patientId], (err, results) => {
     if (err) {
       console.error('Error al obtener tratamientos:', err);

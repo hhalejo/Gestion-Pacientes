@@ -1,9 +1,9 @@
 /* Contenedor principal del formulario */
 .add-patient-container {
     width: 100%;
-    max-width: 900px; /* Aumentamos el ancho máximo del formulario */
+    max-width: 900px; 
     margin: 0 auto;
-    margin-left: 140px;
+    margin-left: 250px;
     padding: 2rem;
     background-color: #f9f9f9;
     border-radius: 10px;
@@ -14,10 +14,10 @@
   
   .add-patient-container:hover {
     box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
-    transform: scale(1.02); /* Le da un pequeño efecto de agrandamiento */
+    transform: scale(1.02); 
   }
   
-  /* Título */
+
   .add-patient-container h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
@@ -26,10 +26,10 @@
   }
   
   .add-patient-container:hover h2 {
-    color: #357ab7; /* Cambia el color del título al pasar el ratón */
+    color: #357ab7; 
   }
   
-  /* Estilo de los inputs */
+ 
   .add-patient-container input {
     width: 100%;
     padding: 12px;
@@ -62,13 +62,13 @@
     margin-top: 1rem;
   }
   
-  /* Efecto hover en el botón */
+ 
   .add-patient-container button:hover {
     background-color: #357ab7;
     transform: translateY(-3px); /* Efecto de elevación */
   }
   
-  /* Efecto cuando el botón es presionado */
+  
   .add-patient-container button:active {
     transform: translateY(1px); /* Rebote al presionar el botón */
   }
