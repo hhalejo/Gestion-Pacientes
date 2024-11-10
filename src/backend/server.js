@@ -1,6 +1,7 @@
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
+const router = express.Router();
 
 const app = express();
 const port = 5000;
@@ -9,7 +10,7 @@ const port = 5000;
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '', // Cambia si tienes una contraseña en MySQL
+  password: '',
   database: 'GESTION SALUD'
 });
 
@@ -39,16 +40,16 @@ app.get('/Pacientes', (req, res) => {
 
 // Ruta para actualizar pacientes
 app.put('/Pacientes/:id', (req, res) => {
-  const patientId = req.params.id;
+  const tratmentId = req.params.id;
   const { Nombre, Edad, Direccion, Telefono, Antecedentes_Medicos } = req.body;
- // Imprimir los datos recibidos para verificar que son correctos
-  console.log('Datos para actualizar:', { Nombre, Edad, Direccion, Telefono,Antecedentes_Medicos, patientId }); 
+ 
+  console.log('Datos para actualizar:', { Nombre, Edad, Direccion, Telefono,Antecedentes_Medicos, tratmentId }); 
 
   console.log('Datos recibidos para actualización:', req.body); // Depuración
 
   const query = 'UPDATE Pacientes SET Nombre = ?, Edad = ?, Direccion = ?, Telefono = ?, Antecedentes_Medicos = ? WHERE ID_Paciente = ?';
   
-  db.query(query, [Nombre, Edad, Direccion, Telefono, Antecedentes_Medicos, patientId, ], (err, results) => {
+  db.query(query, [Nombre, Edad, Direccion, Telefono, Antecedentes_Medicos, tratmentId, ], (err, results) => {
     if (err) {
       console.error('Error al actualizar paciente:', err);
       return res.status(500).json({ message: 'Error al actualizar paciente', error: err });
@@ -78,7 +79,7 @@ app.get('/medicos', (req, res) => {
 
 // Ruta para agregar pacientes
 app.post('/Pacientes', (req, res) => {
-  const { ID_Paciente, Nombre, Edad, Genero, Direccion, Numero_Contacto, Antecedentes_Medicos, Telefono } = req.body;
+  const {ID_Paciente, Nombre, Edad, Genero, Direccion, Numero_Contacto, Antecedentes_Medicos, Telefono } = req.body;
 
   const query = 'INSERT INTO pacientes (id_paciente, nombre, edad, genero, direccion, telefono, numero_contacto, antecedentes_medicos) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
   
@@ -87,7 +88,7 @@ app.post('/Pacientes', (req, res) => {
       console.error('Error al agregar paciente:', err);
       return res.status(500).json({ message: 'Error al agregar paciente', error: err });
     }
-    res.status(200).json({ message: 'Paciente agregado correctamente', patientId: results.insertId });
+    res.status(200).json({ message: 'Paciente agregado correctamente', tratmentId: results.insertId });
   });
 });
 
@@ -107,27 +108,93 @@ app.post('/citas', (req, res) => {
 
 
 
-app.get('/registro_tratamientos/:patientId', (req, res) => {
-  const patientId = req.params.patientId;
+app.get('/registro_tratamientos/:tratmentId', (req, res) => {
+  const tratmentId = req.params.tratmentId;
   
-  // Consulta para obtener tratamientos
-  const query = 'SELECT * FROM Registro_Tratamientos WHERE ID_Paciente = ?';
-  db.query(query, [patientId], (err, results) => {
+  // Consulta para obtener tratamientos con el nombre del tratamiento
+  const query = `
+    SELECT 
+      rt.ID_Tratamiento, 
+      t.Nombre_Tratamiento,
+      rt.ID_Paciente,
+      rt.ID_Medico, 
+      t.Descripcion_Tratamiento, 
+      rt.Fecha_Inicio, 
+      rt.Fecha_Fin, 
+      rt.Frecuencia, 
+      rt.Duracion_Sesion, 
+      rt.Costo, 
+      rt.Notas, 
+      rt.Estado
+    FROM Registro_Tratamientos rt
+    JOIN Tratamientos t ON rt.ID_Tratamiento = t.ID_Tratamiento
+    WHERE rt.ID_Paciente = ?
+  `;
+  
+  db.query(query, [tratmentId], (err, results) => {
     if (err) {
       console.error('Error al obtener tratamientos:', err);
       res.status(500).json({ error: 'Error en el servidor' });
     } else {
-      // Asegúrate de asignar el resultado a la variable `tratamientos`
-      const tratamientos = results;
-      res.json(tratamientos); // envía tratamientos como respuesta
+      res.json(results); // Envío de los resultados
     }
   });
 });
 
 
 
+app.get('/Tratamientos', (req, res) => {
+  db.query('SELECT * FROM Tratamientos', (err, results) => {
+    if (err) {
+      res.status(500).json({ message: 'Error al obtener los tratamientos', error: err });
+    } else {
+      res.json(results);
+    }
+  });
+});
 
-// Iniciar servidor
+
+app.get('/Pacientes/:id', async (req, res) => {
+  try {
+    const pacienteId = req.params.id;
+    const paciente = await Pacientes.findOne({ where: { ID_Paciente: pacienteId } });
+
+    if (paciente) {
+      return res.json(paciente); // Retorna los datos del paciente si existe
+    } else {
+      return res.status(404).json({ message: 'Paciente no encontrado' });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: 'Error al verificar paciente', error });
+  }
+});
+
+
+
+// Endpoint para registrar un tratamiento
+app.post('/Registro_Tratamientos', (req, res) => {
+  const { ID_Tratamiento, ID_Paciente, ID_Medico, Fecha_Inicio, Fecha_Fin, Frecuencia, Duracion_Sesion, Costo, Notas, Estado } = req.body;
+
+  const sql = `
+      INSERT INTO Registro_Tratamientos (ID_Tratamiento, ID_Paciente, ID_Medico, Fecha_Inicio, Fecha_Fin, Frecuencia, Duracion_Sesion, Costo, Notas, Estado)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+
+  const values = [ID_Tratamiento, ID_Paciente, ID_Medico, Fecha_Inicio, Fecha_Fin, Frecuencia, Duracion_Sesion, Costo, Notas, Estado];
+
+  db.query(sql, values, (error, result) => {
+      if (error) {
+          console.error('Error en la inserción: ', error);
+          return res.status(500).send('Error en el registro');
+      }
+      res.status(200).send('Registro exitoso');
+  });
+});
+
+
+
+
+//En esta linea se inicia el servidor
 app.listen(port, () => {
   console.log(`Servidor backend escuchando en http://localhost:${port}`);
 });

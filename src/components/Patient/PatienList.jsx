@@ -43,7 +43,7 @@ const PatientList = () => {
           placeholder="Buscar por nombre o ID"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="search-input"
+          
         />
         
         <ul>
@@ -56,6 +56,7 @@ const PatientList = () => {
               >
                 <div>
                   <strong>{patient.Nombre || "Nombre no disponible"}</strong>
+
                 </div>
               </li>
             ))
@@ -119,6 +120,19 @@ const PatientList = () => {
       )}
     </div>
   );
+};
+
+export const validatePatient = async (patientId) => {
+  try {
+    const response = await axios.get(`http://localhost:5000/pacientes/${patientId}`);
+    if (response.data) {
+      return true; // El paciente existe
+    }
+    return false; // El paciente no existe
+  } catch (error) {
+    console.error('Error al validar paciente:', error);
+    return false;
+  }
 };
 
 export default PatientList;

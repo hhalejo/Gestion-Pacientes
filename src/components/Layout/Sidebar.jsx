@@ -31,7 +31,7 @@ function Sidebar() {
 
           <li><Link to="/doctors"><FaStethoscope /> Médicos</Link></li>
           <li><Link to="/appointments"><FaCalendarCheck /> Citas</Link></li>
-          <li><Link to="/treatments"><FaMedkit /> Tratamientos</Link></li>
+          <li><Link to="/Treatments"><FaMedkit /> Tratamientos </Link></li>
         </ul>
       </nav>
     </div>

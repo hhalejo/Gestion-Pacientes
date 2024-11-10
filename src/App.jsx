@@ -6,7 +6,8 @@ import PatientList from './components/Patient/PatienList';
 import AddPatient from './components/Addpatient/AddPatient';
 import DoctorList from './components/Doctor/DoctorList';
 import AppointmentList from './components/Appointment/AppointmentList';
-import TreatmentList from './components/Treatment/TreatmentList';
+
+import Treatments from './components/Treatment/Treatments';
 import './index.css';
 
 function App() {
@@ -23,7 +24,8 @@ function App() {
               <Route path="/add-patient" element={<AddPatient />} />
               <Route path="/doctors" element={<DoctorList />} />
               <Route path="/appointments" element={<AppointmentList />} />
-              <Route path="/treatments" element={<TreatmentList />} />
+              <Route path="/treatments" element={<Treatments />} />
+              
             </Routes>
           </div>
         </div>

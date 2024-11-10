@@ -1,0 +1,203 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Estilo general del contenedor */
+  body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;  /* Centra horizontalmente */
+    align-items: center;  /* Centra verticalmente */
+    background-color: #f4f4f9;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Centra los elementos dentro de .container */
+    justify-content: center; /* Centra verticalmente */
+    padding: 20px;
+    
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    max-width: 900px;
+    width: 150%;
+    margin-top: 130px;
+    min-height: 80vh;  /* Toma al menos el 80% de la altura de la ventana */
+  }
+  
+  /* Título principal */
+  .title {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+  }
+  
+  /* Estilo de la búsqueda */
+  .search-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .search-input, .search-select {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 150px;
+  }
+  .search-select{
+    height: 40px;
+  }
+  
+  /* Estilo de la lista de tratamientos en dos columnas */
+  .tratamiento-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+    gap: 15px; /* Espacio entre las celdas */
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 40px;
+    max-width: 700px;
+    width: 100%;
+    justify-content: center; /* Centra los elementos */
+  }
+  
+  .tratamiento-button {
+    background-color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 1.1em;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  
+  .tratamiento-button:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .tratamiento-button.selected {
+    background-color: #4a90e2;
+    color: white;
+  }
+  
+  /* Estilos del modal */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;  /* Centra horizontalmente */
+    align-items: center;  /* Centra verticalmente */
+    z-index: 1000;
+    opacity: 0;
+    animation: fadeInOverlay 0.3s forwards;
+  }
+  
+  @keyframes fadeInOverlay {
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .modal-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;  /* Tamaño pequeño para el modal */
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: scale(0.8);
+    animation: zoomInModal 0.4s forwards;
+  }
+  
+  @keyframes zoomInModal {
+    to {
+      transform: scale(1);
+    }
+  }
+  
+  h2 {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Celdas de formulario */
+  .cell {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #555;
+  }
+  
+  input, textarea {
+    padding: 12px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  textarea {
+    resize: vertical;
+    height: 100px;
+  }
+  
+  /* Botones */
+  button.submit-btn {
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+  
+  button.submit-btn:hover {
+    background-color: #4a90e2;
+  }
+  
+  button.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  button.close-modal:hover {
+    color: #f44336;
+  }
+  
