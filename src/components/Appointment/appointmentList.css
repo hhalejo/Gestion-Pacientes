@@ -1,72 +1,81 @@
-/* AppointmentList.css */
-.appointment-list {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-  }
-  
-  .appointment-list h2 {
-    color: #34495e;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .appointment-list ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .appointment-list ul li {
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 16px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .appointment-list ul li:last-child {
-    margin-bottom: 0;
-  }
-  
-  .appointment-list ul li:hover {
-    background-color: #ecf0f1;
-    cursor: pointer;
-  }
-  
-  .appointment-list ul li .appointment-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .appointment-list ul li .appointment-info span {
-    color: #7f8c8d;
-    font-size: 14px;
-  }
-  
-  .appointment-list ul li .appointment-time {
-    color: #2d3e50;
-    font-weight: bold;
-  }
-  
-  .appointment-list ul li .appointment-status {
-    color: #27ae60; /* Verde para citas confirmadas */
-    font-weight: bold;
-  }
-  
-  .appointment-list ul li .appointment-status.pending {
-    color: #f39c12; /* Naranja para citas pendientes */
-  }
-  
-  .appointment-list ul li .appointment-status.cancelled {
-    color: #e74c3c; /* Rojo para citas canceladas */
-  }
-  
+/* asignarCita.css */
+.form-container {
+  max-width: 900px;       /* Aumenta el ancho máximo */
+  margin: 0 auto;
+  margin-left: 200px;
+  padding: 30px;
+  margin-top: 100px;
+  background-color: #f9fafc;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alinea los elementos a la izquierda */
+}
+
+.form-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.form-group {
+  flex: 1;
+  margin: 0 15px;  /* Aumentar el margen entre los campos */
+}
+
+.form-container label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #4a90e2;
+}
+
+.form-container input[type="text"],
+.form-container input[type="date"],
+.form-container input[type="time"],
+.form-container select,
+.form-container textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.form-container textarea {
+  resize: horizontal; /* Solo permite ajustar el ancho */
+  min-width: 400px;   /* Ancho mínimo para textarea */
+  max-width: 100%;    /* El ancho máximo es el 100% del contenedor */
+}
+
+.form-container input[type="checkbox"] {
+  margin-left: 10px;
+  transform: scale(1.2);
+}
+
+.form-container button {
+  width: 100%;
+  padding: 14px;
+  background-color: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.form-container button:hover {
+  background-color: #3b78c3;
+}

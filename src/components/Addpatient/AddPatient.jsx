@@ -20,7 +20,7 @@ const AddPatient = () => {
     const { name, value } = e.target;
     setPatient((prev) => ({
       ...prev,
-      [name]: valuea
+      [name]: value
     }));
   };
 

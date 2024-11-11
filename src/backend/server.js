@@ -38,6 +38,22 @@ app.get('/Pacientes', (req, res) => {
 
 
 
+app.get('/Pacientes/:id', async (req, res) => {
+  try {
+    const pacienteId = req.params.id;
+    const paciente = await Pacientes.findOne({ where: { ID_Paciente: pacienteId } });
+
+    if (paciente) {
+      return res.json(paciente); // Retorna los datos del paciente si existe
+    } else {
+      return res.status(404).json({ message: 'Paciente no encontrado' });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: 'Error al verificar paciente', error });
+  }
+});
+
+
 // Ruta para actualizar pacientes
 app.put('/Pacientes/:id', (req, res) => {
   const tratmentId = req.params.id;
@@ -94,19 +110,6 @@ app.post('/Pacientes', (req, res) => {
 
 
 
-// Ruta para agregar citas
-app.post('/citas', (req, res) => {
-  const { ID_paciente, ID_medico, fecha } = req.body;
-  const query = 'INSERT INTO citas (paciente_id, medico_id, fecha) VALUES (?, ?, ?)';
-  db.query(query, [ID_paciente, ID_medico, fecha], (err, results) => {
-    if (err) {
-      return res.status(500).json({ error: err.message });
-    }
-    res.status(201).json({ id: results.insertId });
-  });
-});
-
-
 
 app.get('/registro_tratamientos/:tratmentId', (req, res) => {
   const tratmentId = req.params.tratmentId;
@@ -154,23 +157,6 @@ app.get('/Tratamientos', (req, res) => {
 });
 
 
-app.get('/Pacientes/:id', async (req, res) => {
-  try {
-    const pacienteId = req.params.id;
-    const paciente = await Pacientes.findOne({ where: { ID_Paciente: pacienteId } });
-
-    if (paciente) {
-      return res.json(paciente); // Retorna los datos del paciente si existe
-    } else {
-      return res.status(404).json({ message: 'Paciente no encontrado' });
-    }
-  } catch (error) {
-    return res.status(500).json({ message: 'Error al verificar paciente', error });
-  }
-});
-
-
-
 // Endpoint para registrar un tratamiento
 app.post('/Registro_Tratamientos', (req, res) => {
   const { ID_Tratamiento, ID_Paciente, ID_Medico, Fecha_Inicio, Fecha_Fin, Frecuencia, Duracion_Sesion, Costo, Notas, Estado } = req.body;
@@ -191,7 +177,41 @@ app.post('/Registro_Tratamientos', (req, res) => {
   });
 });
 
+//prueba registro citas
+app.post('/Citas_Medicas', (req, res) => {
+  const { ID_Paciente,	ID_Medico,	Fecha,	Hora,	Motivo_Cita,	Requiere_Tratamiento,	ID_Tratamiento,	Estado } = req.body;
 
+  const sql = `
+      INSERT INTO Citas_Medicas (ID_Paciente,	ID_Medico,	Fecha,	Hora,	Motivo_Cita,	Requiere_Tratamiento,	ID_Tratamiento,	Estado)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+
+  const values = [ID_Paciente,	ID_Medico,	Fecha,	Hora,	Motivo_Cita,	Requiere_Tratamiento,	ID_Tratamiento,	Estado];
+
+  db.query(sql, values, (error, result) => {
+      if (error) {
+          console.error('Error en la insercion de cita medica: ', error);
+          return res.status(500).send('Error en el registro de cita medica');
+      }
+      res.status(200).send('Registro exitoso de la cita medica');
+  });
+});
+
+
+
+
+// // Ruta para agregar citas
+// app.post('/Citas_Medicas', (req, res) => {
+//   const { ID_Paciente,	ID_Medico,	Fecha,	Hora,	Motivo_Cita,	Requiere_Tratamiento,	ID_Tratamiento,	Estado } = req.body;
+//   const query = 'id_paciente,	id_Medico,	fecha,	hora,	motivo_cita,	requiere_tratamiento,	id_tratamiento,	estado) VALUES (?, ?, ?, ?, ?, ?, ?)';
+//   db.query(query, [ID_Paciente,	ID_Medico,	Fecha,	Hora,	Motivo_Cita,	Requiere_Tratamiento,	ID_Tratamiento,	Estado], (err, results) => {
+//     if (err) {
+//       console.error('Error al agregar paciente:', err);
+//       return res.status(500).json({ message: 'Error al agregar paciente', error: err });
+//     }
+//     res.status(200).json({ message: 'Paciente agregado correctamente', tratmentId: results.insertId });
+//   });
+// });
 
 
 //En esta linea se inicia el servidor
