@@ -5,9 +5,14 @@ import './Sidebar.css';
 
 function Sidebar() {
   const [showPatients, setShowPatients] = useState(false);  // Estado para mostrar/ocultar la lista de pacientes
+  const [showAppointments, setShowAppointments] = useState(false);  // Estado para mostrar/ocultar la lista de pacientes
 
   const togglePatients = () => {
     setShowPatients(!showPatients);  // Cambia el estado cuando se hace clic en "Pacientes"
+  };
+
+  const toggleAppointments = () => {
+    setShowAppointments(!showAppointments);  // Cambia el estado cuando se hace clic en "Pacientes"
   };
 
   return (
@@ -30,7 +35,19 @@ function Sidebar() {
           </li>
 
           <li><Link to="/doctors"><FaStethoscope /> Médicos</Link></li>
-          <li><Link to="/appointments"><FaCalendarCheck /> Citas</Link></li>
+         
+          <li>
+            <Link to="#" onClick={toggleAppointments}>
+              <FaCalendarCheck /> Citas
+            </Link>
+            {/* Condición para mostrar el sub-enlace de lista de pacientes */}
+            {showAppointments && (
+              <ul className="sub-menu">
+                <li><Link to="/appointments">Asignar citas</Link></li>
+                <li><Link to="/cancel-appointments">Cancelar Citas</Link></li>
+              </ul>
+            )}
+          </li>
           <li><Link to="/Treatments"><FaMedkit /> Tratamientos </Link></li>
         </ul>
       </nav>

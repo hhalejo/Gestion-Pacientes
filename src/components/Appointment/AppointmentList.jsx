@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AppointmentList.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Importar los estilos
 
 const AsignarCita = () => {
   const [formData, setFormData] = useState({
@@ -46,7 +48,15 @@ const AsignarCita = () => {
 
     axios.post('http://localhost:5000/citas_medicas', formData)
       .then(response => {
-        alert('Cita médica asignada exitosamente');
+        
+        toast.success('Paciente agregado correctamente', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
         setFormData({
           ID_Paciente: '',
           ID_Medico: '',
@@ -60,8 +70,19 @@ const AsignarCita = () => {
       })
       .catch(error => {
         console.error('Error al asignar cita médica:', error);
-        alert('Hubo un error al asignar la cita');
+        
+        toast.error('Hubo un error al agregar al paciente', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+
       });
+      
+      
   };
 
   return (
@@ -131,7 +152,14 @@ const AsignarCita = () => {
       
       <button type="submit">Asignar Cita</button>
     </form>
+    
+    
+
   );
+  
+  
+  
 };
+
 
 export default AsignarCita;

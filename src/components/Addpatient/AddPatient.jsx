@@ -88,13 +88,19 @@ const AddPatient = () => {
           onChange={handleChange} 
           placeholder="Edad" 
         />
-        <input 
-          type="text" 
-          name="Genero"  
-          value={Patient.Genero} 
-          onChange={handleChange} 
-          placeholder="Género" 
-        />
+        <select className='inputs'
+       
+        name="Genero"  
+        value={Patient.Genero} 
+        onChange={handleChange} 
+        placeholder="Género"
+        required
+          >
+            <option value="" >Seleccione Género</option>
+            <option value="M" >Masculino</option>
+            <option value="F" >Femenino</option>
+            <option value="Otro" >Otro</option>
+        </select>
         <input 
           type="text" 
           name="Direccion"  
@@ -102,6 +108,8 @@ const AddPatient = () => {
           onChange={handleChange} 
           placeholder="Dirección" 
         />
+
+        
         <input 
           type="text" 
           name="Telefono"  

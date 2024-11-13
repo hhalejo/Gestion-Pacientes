@@ -173,6 +173,7 @@ button:focus {
   color: white;
   border-radius: 6px;
   cursor: pointer;
+  width: 110px;
 }
 
 .edit-btn:hover {

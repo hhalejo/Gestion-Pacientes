@@ -3,8 +3,7 @@ import './DoctorList.css';
 
 function DoctorList() {
   const doctors = [
-    { id: 1, name: 'Dr. Roberto García', specialty: 'Cardiología' },
-    { id: 2, name: 'Dra. Laura Mendoza', specialty: 'Pediatría' },
+    
   ];
 
   return (

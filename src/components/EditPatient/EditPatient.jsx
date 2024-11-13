@@ -1,4 +1,3 @@
-// EditPatient.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import './EditPatient.css';
@@ -10,7 +9,7 @@ const EditPatient = ({ patient, onSave, onCancel }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUpdatedPatient(prevState => ({
+    setUpdatedPatient((prevState) => ({
       ...prevState,
       [name]: value,
     }));
@@ -18,7 +17,7 @@ const EditPatient = ({ patient, onSave, onCancel }) => {
 
   const handleSaveClick = () => {
     axios.put(`http://localhost:5000/pacientes/${patient.ID_Paciente}`, updatedPatient)
-      .then(response => {
+      .then((response) => {
         toast.success('Paciente actualizado correctamente', {
           position: "top-right",
           autoClose: 5000,
@@ -27,9 +26,9 @@ const EditPatient = ({ patient, onSave, onCancel }) => {
           pauseOnHover: true,
           draggable: true,
         });
-
+        onSave(response.data); // Llama a onSave con los datos actualizados
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error al actualizar paciente:', error);
         toast.error('Error al actualizar paciente', {
           position: "top-right",
@@ -58,7 +57,7 @@ const EditPatient = ({ patient, onSave, onCancel }) => {
         </div>
 
         <div className="form-group">
-          <label className='etiquetas'>Edad:</label>
+          <label>Edad:</label>
           <input
             type="number"
             name="Edad"
@@ -104,10 +103,9 @@ const EditPatient = ({ patient, onSave, onCancel }) => {
         <div className="form-actions">
           <button type="button" onClick={handleSaveClick} className="save-btn">Guardar cambios</button>
           <button type="button" onClick={onCancel} className="cancel-btn">Cancelar</button>
-        </div>  
+        </div>
       </form>
 
-      
       <ToastContainer />
     </div>
   );

@@ -1,0 +1,122 @@
+.cita-list-container {
+    padding: 20px;
+    width: 1000px;
+    height: 500px;
+    margin-left: 250px;
+    
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+  
+  .cita-list-container input{
+
+    width: 32%;
+  }
+
+
+
+ 
+  
+ 
+  .cita-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start; /* Alinea las tarjetas a la izquierda */
+  }
+  
+  .cita-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 300px; /* Evita que las tarjetas se desborden en pantallas grandes */
+    box-sizing: border-box;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .cita-card:hover {
+    transform: scale(1.05); /* Da un pequeño efecto al pasar el cursor sobre las tarjetas */
+  }
+  
+  .cita-card h3 {
+    margin-top: 0;
+  }
+  
+  .cita-actions {
+    margin-top: 15px;
+  }
+  
+  .cita-actions button {
+    padding: 8px 15px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .cita-actions button:hover {
+    background-color: #0056b3;
+  }
+  
+  
+  
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 500px;
+  }
+
+  .modal-content input{
+    width: 170px;
+  }
+  
+  input {
+    margin-bottom: 10px;
+    padding: 8px;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 12px;
+  }
+  
+  .search-input:focus {
+    outline: none;
+    border-color: #007BFF;
+  }
+  

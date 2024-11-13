@@ -54,6 +54,20 @@ app.get('/Pacientes/:id', async (req, res) => {
 });
 
 
+
+app.get('/Pacientes', (req, res) => {
+  db.query('SELECT * FROM Pacientes', (err, results) => {
+    if (err) {
+      res.status(500).json({ message: 'Error al obtener los Pacientes', error: err });
+    } else {
+      res.json(results);
+    }
+  });
+});
+
+
+
+
 // Ruta para actualizar pacientes
 app.put('/Pacientes/:id', (req, res) => {
   const tratmentId = req.params.id;
@@ -114,7 +128,6 @@ app.post('/Pacientes', (req, res) => {
 app.get('/registro_tratamientos/:tratmentId', (req, res) => {
   const tratmentId = req.params.tratmentId;
   
-  // Consulta para obtener tratamientos con el nombre del tratamiento
   const query = `
     SELECT 
       rt.ID_Tratamiento, 
@@ -177,7 +190,55 @@ app.post('/Registro_Tratamientos', (req, res) => {
   });
 });
 
-//prueba registro citas
+//obtener lista de citas
+app.get('/Citas_Medicas', (req, res) => {
+  db.query('SELECT * FROM Citas_Medicas', (err, results) => {
+    if (err) {
+      res.status(500).json({ message: 'Error al obtener lcitasas ', error: err });
+    } else {
+      res.json(results);
+    }
+  });
+});
+
+
+//Eliminar Citas Medicas
+app.delete('/Citas_Medicas/:id', (req, res) => {
+  const citaId = req.params.id;
+
+  
+  const query = 'DELETE FROM Citas_Medicas WHERE ID_Cita = ?';
+
+  db.query(query, [citaId], (err, result) => {
+    if (err) {
+      console.error('Error al eliminar la cita:', err);
+      return res.status(500).json({ message: 'Error al eliminar la cita' });
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'Cita no encontrada' });
+    }
+
+    res.status(200).json({ message: 'Cita eliminada correctamente' });
+  });
+});
+
+//Actualizar cita
+app.put('/Citas_Medicas/:id', (req, res) => {
+  const { id } = req.params;
+  const { Fecha, Hora } = req.body;
+
+  // Realizar la consulta SQL para actualizar la cita en la base de datos
+  const query = `UPDATE Citas_Medicas SET Fecha = ?, Hora = ? WHERE ID_Cita = ?`;
+  db.query(query, [Fecha, Hora, id], (err, result) => {
+    if (err) {
+      console.error('Error al actualizar la cita:', err);
+      res.status(500).send('Error al actualizar la cita');
+    } else {
+      res.send('Cita actualizada correctamente');
+    }
+  });
+});
 app.post('/Citas_Medicas', (req, res) => {
   const { ID_Paciente,	ID_Medico,	Fecha,	Hora,	Motivo_Cita,	Requiere_Tratamiento,	ID_Tratamiento,	Estado } = req.body;
 
@@ -200,18 +261,10 @@ app.post('/Citas_Medicas', (req, res) => {
 
 
 
-// // Ruta para agregar citas
-// app.post('/Citas_Medicas', (req, res) => {
-//   const { ID_Paciente,	ID_Medico,	Fecha,	Hora,	Motivo_Cita,	Requiere_Tratamiento,	ID_Tratamiento,	Estado } = req.body;
-//   const query = 'id_paciente,	id_Medico,	fecha,	hora,	motivo_cita,	requiere_tratamiento,	id_tratamiento,	estado) VALUES (?, ?, ?, ?, ?, ?, ?)';
-//   db.query(query, [ID_Paciente,	ID_Medico,	Fecha,	Hora,	Motivo_Cita,	Requiere_Tratamiento,	ID_Tratamiento,	Estado], (err, results) => {
-//     if (err) {
-//       console.error('Error al agregar paciente:', err);
-//       return res.status(500).json({ message: 'Error al agregar paciente', error: err });
-//     }
-//     res.status(200).json({ message: 'Paciente agregado correctamente', tratmentId: results.insertId });
-//   });
-// });
+
+
+
+
 
 
 //En esta linea se inicia el servidor

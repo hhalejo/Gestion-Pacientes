@@ -1,75 +1,105 @@
-/* Contenedor principal del formulario */
-.add-patient-container {
-    width: 100%;
-    max-width: 900px; 
-    margin: 0 auto;
-    margin-left: 250px;
-    padding: 2rem;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: all 0.3s ease;
+/* Animación de fade-in para el contenedor */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px); /* Movimiento inicial hacia arriba */
   }
-  
-  .add-patient-container:hover {
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
-    transform: scale(1.02); 
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* Posición final */
   }
-  
+}
 
-  .add-patient-container h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #4a90e2;
-    transition: color 0.3s ease;
-  }
-  
-  .add-patient-container:hover h2 {
-    color: #357ab7; 
-  }
-  
- 
-  .add-patient-container input {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 1.2rem;
-    font-size: 16px;
-    border-radius: 8px;
-    border: 1px solid #d0d4d8;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
-  }
-  
-  /* Efecto en los inputs cuando están enfocados */
-  .add-patient-container input:focus {
-    border-color: #4a90e2;
-    box-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
-    outline: none;
-  }
-  
-  /* Estilo de los botones */
-  .add-patient-container button {
-    background-color: #4a90e2;
-    color: #fff;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    margin-top: 1rem;
-  }
-  
- 
-  .add-patient-container button:hover {
-    background-color: #357ab7;
-    transform: translateY(-3px); /* Efecto de elevación */
-  }
-  
-  
-  .add-patient-container button:active {
-    transform: translateY(1px); /* Rebote al presionar el botón */
-  }
-  
+/* Contenedor principal del formulario con efecto de apertura */
+.add-patient-container {
+  width: 70%;
+  height: 580px;
+  max-width: 900px; 
+  margin: 0 auto;
+  margin-left: 250px;
+  margin-top: 150px;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+  opacity: 0; /* Comienza invisible */
+  animation: fadeIn 1.2s ease forwards; /* Aplica la animación con duración más lenta */
+}
+
+/* Efecto de hover */
+.add-patient-container:hover {
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+  transform: scale(1.02); 
+}
+
+/* El resto del CSS se mantiene igual */
+.add-patient-container h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #4a90e2;
+  transition: color 0.3s ease;
+}
+
+.add-patient-container:hover h2 {
+  color: #357ab7; 
+}
+
+.add-patient-container input {
+  width: 100%;
+  padding: 9px;
+  margin-bottom: 1.2rem;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #d0d4d8;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.add-patient-container input:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
+  outline: none;
+}
+
+.add-patient-container button {
+  background-color: #4a90e2;
+  color: #fff;
+  padding: 10px 30px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.add-patient-container button:hover {
+  background-color: #357ab7;
+  transform: translateY(-3px);
+}
+
+.add-patient-container button:active {
+  transform: translateY(1px);
+}
+
+
+.inputs{width: 100%;
+  padding: 9px;
+  margin-bottom: 1.2rem;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #d0d4d8;
+  color:rgb(129, 125, 125);
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.5s ease;
+}
+
+.input:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
+  outline: none;
+}
