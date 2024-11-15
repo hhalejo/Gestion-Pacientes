@@ -194,7 +194,7 @@ app.post('/Registro_Tratamientos', (req, res) => {
 app.get('/Citas_Medicas', (req, res) => {
   db.query('SELECT * FROM Citas_Medicas', (err, results) => {
     if (err) {
-      res.status(500).json({ message: 'Error al obtener lcitasas ', error: err });
+      res.status(500).json({ message: 'Error al obtener las citas ', error: err });
     } else {
       res.json(results);
     }
@@ -202,24 +202,20 @@ app.get('/Citas_Medicas', (req, res) => {
 });
 
 
-//Eliminar Citas Medicas
-app.delete('/Citas_Medicas/:id', (req, res) => {
-  const citaId = req.params.id;
+//Cancelar Citas Medicas
+app.put('/Citas_Medicas/:id', (req, res) => {
+  const id = req.params.id;
+  const nuevoEstado = req.body.Estado;
 
+  const query = `UPDATE Citas_Medicas SET Estado = ? WHERE ID_Cita = ?`;
   
-  const query = 'DELETE FROM Citas_Medicas WHERE ID_Cita = ?';
-
-  db.query(query, [citaId], (err, result) => {
-    if (err) {
-      console.error('Error al eliminar la cita:', err);
-      return res.status(500).json({ message: 'Error al eliminar la cita' });
+  db.query(query, [nuevoEstado, id], (error, results) => {
+    if (error) {
+      console.error('Error al actualizar el estado de la cita:', error);
+      res.status(500).send('Error en el servidor');
+    } else {
+      res.send('Cita cancelada correctamente');
     }
-
-    if (result.affectedRows === 0) {
-      return res.status(404).json({ message: 'Cita no encontrada' });
-    }
-
-    res.status(200).json({ message: 'Cita eliminada correctamente' });
   });
 });
 
@@ -227,10 +223,11 @@ app.delete('/Citas_Medicas/:id', (req, res) => {
 app.put('/Citas_Medicas/:id', (req, res) => {
   const { id } = req.params;
   const { Fecha, Hora } = req.body;
+  const Estado = req.body.Estado;
 
   // Realizar la consulta SQL para actualizar la cita en la base de datos
-  const query = `UPDATE Citas_Medicas SET Fecha = ?, Hora = ? WHERE ID_Cita = ?`;
-  db.query(query, [Fecha, Hora, id], (err, result) => {
+  const query = `UPDATE Citas_Medicas SET Fecha = ?, Hora = ?, Estado = ? WHERE ID_Cita = ?`;
+  db.query(query, [Fecha, Hora, Estado, id], (err, result) => {
     if (err) {
       console.error('Error al actualizar la cita:', err);
       res.status(500).send('Error al actualizar la cita');
@@ -239,6 +236,7 @@ app.put('/Citas_Medicas/:id', (req, res) => {
     }
   });
 });
+
 app.post('/Citas_Medicas', (req, res) => {
   const { ID_Paciente,	ID_Medico,	Fecha,	Hora,	Motivo_Cita,	Requiere_Tratamiento,	ID_Tratamiento,	Estado } = req.body;
 
@@ -257,14 +255,6 @@ app.post('/Citas_Medicas', (req, res) => {
       res.status(200).send('Registro exitoso de la cita medica');
   });
 });
-
-
-
-
-
-
-
-
 
 
 //En esta linea se inicia el servidor
